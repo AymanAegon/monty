@@ -1,33 +1,26 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "monty.h"
 
-typedef struct stack_node
+stack_t *push_func(int argument)
 {
-    int value;
-    struct stack_node *next;
-} StackNode;
+    stack_t *new_node = malloc(sizeof(stack_t));
 
-StackNode *stack = NULL;
-
-void push_func(int argument, int line_number)
-{
-    StackNode *new_node = malloc(sizeof(StackNode));
     if (new_node == NULL)
     {
         fprintf(stderr, "Error: malloc failed\n");
         exit(EXIT_FAILURE);
     }
-    new_node->value = argument;
+    new_node->n = argument;
     new_node->next = stack;
     stack = new_node;
+    return (new_node);
 }
 
 void pall_func()
 {
-    StackNode *current = stack;
+    stack_t *current = stack;
     while (current != NULL)
     {
-        printf("%d\n", current->value);
+        printf("%d\n", current->n);
         current = current->next;
     }
 }
