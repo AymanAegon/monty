@@ -24,6 +24,8 @@ void check_instruction(stack_t **stack, char *line, unsigned int line_number)
 	if (b == 0)
 	{
 		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
+		free_stack(*stack);
+		fclose(data.file);
 		exit(EXIT_FAILURE);
 	}
 	data.arg = strtok(NULL, " \t\n");
@@ -50,12 +52,15 @@ int main(int argc, char **argv)
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
+		free_stack(stack);
 		exit(EXIT_FAILURE);
 	}
 	data.file = open_file(argv[1]);
 	if (!data.file)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
+		free_stack(stack);
+		fclose(data.file);
 		exit(EXIT_FAILURE);
 	}
 	create_opcode_arr();
@@ -64,7 +69,7 @@ int main(int argc, char **argv)
 		line_number++;
 		check_instruction(&stack, line, line_number);
 	}
-
+	free_stack(stack);
 	fclose(data.file);
 
 	return (0);

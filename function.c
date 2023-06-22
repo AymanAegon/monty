@@ -2,11 +2,16 @@
 
 /**
  * create_opcode_arr - create opcode array
+ * 
  * Return: void
 */
-void create_opcode_arr(void)
+void create_opcode_arr()
 {
-	instruction_t arr[NUMBER_OPCODE] = {{"push", push_func}, {"pall", pall_func}};
+	instruction_t arr[NUMBER_OPCODE] = {
+	{"push", push_func},
+	{"pall", pall_func},
+	{"pint", pint_func}
+	};
 	int i;
 
 	for (i = 0; i < NUMBER_OPCODE; i++)
@@ -24,6 +29,7 @@ void push_func(stack_t **stack, unsigned int line_number)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		fclose(data.file);
+		free_stack(*stack);
 		exit(EXIT_FAILURE);
 	}
 
@@ -43,6 +49,8 @@ stack_t *push(stack_t **stack, int n)
 	if (new_node == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
+		free_stack(*stack);
+		fclose(data.file);
 		exit(EXIT_FAILURE);
 	}
 	if (head)
