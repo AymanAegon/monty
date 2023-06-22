@@ -10,7 +10,8 @@ void create_opcode_arr(void)
 	{"push", push_func},
 	{"pall", pall_func},
 	{"pint", pint_func},
-	{"pop", pop_func}
+	{"pop", pop_func},
+	{"swap", swap_func}
 	};
 	int i;
 

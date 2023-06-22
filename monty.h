@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define NUMBER_OPCODE 4
+#define NUMBER_OPCODE 5
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -51,6 +51,7 @@ void push_func(stack_t **stack, unsigned int line_number);
 void pall_func(stack_t **stack, unsigned int line_number);
 void pint_func(stack_t **stack, unsigned int line_number);
 void pop_func(stack_t **head, unsigned int line_number);
+void swap_func(stack_t **head, unsigned int line_number);
 void check_instruction(stack_t **stack, char *line, unsigned int line_number);
 void create_opcode_arr();
 void free_stack(stack_t *head);
