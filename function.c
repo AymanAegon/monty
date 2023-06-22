@@ -9,7 +9,8 @@ void create_opcode_arr(void)
 	instruction_t arr[NUMBER_OPCODE] = {
 	{"push", push_func},
 	{"pall", pall_func},
-	{"pint", pint_func}
+	{"pint", pint_func},
+	{"pop", pop_func}
 	};
 	int i;
 
