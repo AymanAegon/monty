@@ -52,6 +52,7 @@ void pall_func(stack_t **stack, unsigned int line_number);
 void pint_func(stack_t **stack, unsigned int line_number);
 void check_instruction(stack_t **stack, char *line, unsigned int line_number);
 void create_opcode_arr();
+void free_stack(stack_t *head);
 int is_number(char *str);
 FILE *open_file(char *str);
 int get_argument(char *str);
