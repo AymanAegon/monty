@@ -17,7 +17,7 @@ void check_instruction(stack_t **stack, char *line, unsigned int line_number)
 	for (i = 0; i < NUMBER_OPCODE; i++)
 	{
 		if (strcmp(opcode, opcodes[i].opcode) == 0)
-			b = 1;	
+			b = 1;
 	}
 	if (b == 0)
 	{
@@ -62,7 +62,7 @@ int main(int argc, char **argv)
 		line_number++;
 		check_instruction(&stack, line, line_number);
 	}
-	
+
 	fclose(data.file);
 
 	return (0);
