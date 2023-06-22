@@ -55,6 +55,7 @@ void create_opcode_arr();
 int is_number(char *str);
 FILE *open_file(char *str);
 int get_argument(char *str);
+void free_stack(stack_t *head);
 stack_t *push(stack_t **stack, int n);
 
 instruction_t opcodes[NUMBER_OPCODE];

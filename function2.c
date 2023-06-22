@@ -1,7 +1,7 @@
 #include "monty.h"
 
 /**
- * push_func - add node to the stack
+ * pint_func - add node to the stack
  * @stack: stack head
  * @line_number: line_number
  * Return: void
