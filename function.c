@@ -2,10 +2,9 @@
 
 /**
  * create_opcode_arr - create opcode array
- * 
  * Return: void
 */
-void create_opcode_arr()
+void create_opcode_arr(void)
 {
 	instruction_t arr[NUMBER_OPCODE] = {
 	{"push", push_func},
