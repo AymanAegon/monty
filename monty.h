@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define NUMBER_OPCODE 2
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -21,6 +22,18 @@ typedef struct stack_s
 
 stack_t *stack;
 /**
+ * struct data_s - variables -args, file
+ * @arg: value
+ * @file: pointer to monty file
+ * Description: carries values through the program
+ */
+typedef struct data_s
+{
+	char *arg;
+	FILE *file;
+}  data_t;
+data_t data;
+/**
  * struct instruction_s - opcode and its function
  * @opcode: the opcode
  * @f: function to handle the opcode
@@ -34,7 +47,14 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-stack_t *push_func(int argument);
-void pall_func();
-void check_instruction(char *line, int line_number);
+void push_func(stack_t **stack, unsigned int line_number);
+void pall_func(stack_t **stack, unsigned int line_number);
+void check_instruction(stack_t **stack, char *line, unsigned int line_number);
+void create_opcode_arr();
+int is_number(char *str);
+FILE *open_file(char *str);
+int get_argument(char *str);
+stack_t *push(stack_t **stack, int n);
+
+instruction_t opcodes[NUMBER_OPCODE];
 #endif

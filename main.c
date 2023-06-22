@@ -1,64 +1,69 @@
 #include "monty.h"
 #include <string.h>
 
-
-void check_instruction(char *line, int line_number)
+/**
+ * check_instruction - check instructions and execute them
+ * @stack: stack
+ * @line: line of the instruction
+ * @line_number: number of the line
+ * Return: void
+*/
+void check_instruction(stack_t **stack, char *line, unsigned int line_number)
 {
-    char *opcode, *argument;
-    int arg_value;
+	char *opcode;
+	int i, b = 0;
 
 	opcode = strtok(line, " \t\n");
-    if (opcode == NULL)
-    	return;
-    if (strcmp(opcode, "push") == 0)
-    {
-        argument = strtok(NULL, " \t\n");
-		if (argument == NULL)
+	for (i = 0; i < NUMBER_OPCODE; i++)
+	{
+		if (strcmp(opcode, opcodes[i].opcode) == 0)
+			b = 1;	
+	}
+	if (b == 0)
+	{
+		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
+		exit(EXIT_FAILURE);
+	}
+	data.arg = strtok(NULL, " \t\n");
+	for (i = 0; i < NUMBER_OPCODE; i++)
+	{
+		if (strcmp(opcode, opcodes[i].opcode) == 0)
 		{
-			fprintf(stderr, "L%d: usage: push integer\n", line_number);
-    		exit(EXIT_FAILURE);
-		}
-		else
-		{
-			sscanf(argument, "%d", &arg_value);
-			push_func(arg_value);
+			opcodes[i].f(stack, line_number);
 		}
 	}
-	else if (strcmp(opcode, "pall") == 0)
-    {
-        pall_func();
-    }
-    else
-    {
-        fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
-        exit(EXIT_FAILURE);
-    }
 }
-
+/**
+ * main - monty main code
+ * @argc: number of arguments
+ * @argv: monty file
+ * Return: 0 on success
+*/
 int main(int argc, char **argv)
 {
-    FILE *f;
-    char line[256];
-    int line_number = 0;
+	char line[256];
+	int line_number = 0;
+	stack_t *stack = NULL;
 
-    if (argc != 2)
-    {
-        fprintf(stderr, "USAGE: monty file\n");
-        exit(EXIT_FAILURE);
-    }
-    f = fopen(argv[1], "r");
-    if (f == NULL)
-    {
-        fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-        exit(EXIT_FAILURE);
-    }
+	if (argc != 2)
+	{
+		fprintf(stderr, "USAGE: monty file\n");
+		exit(EXIT_FAILURE);
+	}
+	data.file = open_file(argv[1]);
+	if (!data.file)
+	{
+		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
+		exit(EXIT_FAILURE);
+	}
+	create_opcode_arr();
+	while (fgets(line, sizeof(line), data.file) != NULL)
+	{
+		line_number++;
+		check_instruction(&stack, line, line_number);
+	}
+	
+	fclose(data.file);
 
-    while (fgets(line, sizeof(line), f) != NULL)
-    {
-        line_number++;
-        check_instruction(line, line_number);
-    }
-    fclose(f);
-
-    return (0);
+	return (0);
 }
