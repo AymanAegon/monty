@@ -14,6 +14,8 @@ void check_instruction(stack_t **stack, char *line, unsigned int line_number)
 	int i, b = 0;
 
 	opcode = strtok(line, " \t\n");
+	if (!opcode)
+		return;
 	for (i = 0; i < NUMBER_OPCODE; i++)
 	{
 		if (strcmp(opcode, opcodes[i].opcode) == 0)
