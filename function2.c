@@ -1,7 +1,7 @@
 #include "monty.h"
 
 /**
- * push_func - add node to the stack
+ * pint_func - add node to the stack
  * @stack: stack head
  * @line_number: line_number
  * Return: void
@@ -12,6 +12,7 @@ void pint_func(stack_t **stack, unsigned int line_number)
 	{
 		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
 		fclose(data.file);
+		free_stack(*stack);
 		exit(EXIT_FAILURE);
 	}
 	printf("%d\n", (*stack)->n);
