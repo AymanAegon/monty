@@ -24,9 +24,7 @@ void sub_func(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 	head = *stack;
-	head = head->next;
-	head->n = head->n - (*stack)->n;
-	head = *stack;
+	head->next->n = head->next->n - head->n;
 	*stack = head->next;
 	free(head);
 }
