@@ -9,24 +9,24 @@
 void sub_func(stack_t **stack, unsigned int line_number)
 {
 	stack_t *head = *stack;
-	int a, b = 0;
+	int len = 0;
 
-	if (head)
+	while (head)
 	{
-		a = head->n;
+		len++;
 		head = head->next;
 	}
-	if (head)
-	{
-		head->n = head->n - a;
-		b = 1;
-	}
-	if (b == 0)
+	if (len < 2)
 	{
 		fprintf(stderr, "L%d: can't sub, stack too short", line_number);
 		free_stack(*stack);
 		fclose(data.file);
 		exit(EXIT_FAILURE);
 	}
-	pop_func(stack, line_number);
+	head = *stack;
+	head = head->next;
+	head->n = head->n - (*stack)->n;
+	head = *stack;
+	*stack = head->next;
+	free(head);
 }
