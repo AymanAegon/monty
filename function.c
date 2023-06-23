@@ -13,7 +13,8 @@ void create_opcode_arr(void)
 	{"pop", pop_func},
 	{"swap", swap_func},
 	{"add", add_func},
-	{"nop", nop_func}
+	{"nop", nop_func},
+	{"sub", sub_func}
 	};
 	int i;
 
