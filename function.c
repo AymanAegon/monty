@@ -14,7 +14,8 @@ void create_opcode_arr(void)
 	{"swap", swap_func},
 	{"add", add_func},
 	{"nop", nop_func},
-	{"sub", sub_func}
+	{"sub", sub_func},
+	{"div", div_func}
 	};
 	int i;
 
