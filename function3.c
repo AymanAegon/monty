@@ -9,7 +9,7 @@
 void sub_func(stack_t **stack, unsigned int line_number)
 {
 	stack_t *head = *stack;
-	int len = 0;
+	int len = 0, a;
 
 	while (head)
 	{
@@ -24,7 +24,8 @@ void sub_func(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 	head = *stack;
-	head->next->n = head->next->n - head->n;
+	a = head->next->n - head->n;
+	head->next->n = a;
 	*stack = head->next;
 	free(head);
 }
