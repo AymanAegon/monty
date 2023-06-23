@@ -18,7 +18,7 @@ void sub_func(stack_t **stack, unsigned int line_number)
 	}
 	if (head)
 	{
-		a = head->n - a;
+		head->n = head->n - a;
 		b = 1;
 	}
 	if (b == 0)
@@ -29,6 +29,4 @@ void sub_func(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 	pop_func(stack, line_number);
-	pop_func(stack, line_number);
-	push(stack, a);
 }
