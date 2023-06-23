@@ -15,7 +15,8 @@ void create_opcode_arr(void)
 	{"add", add_func},
 	{"nop", nop_func},
 	{"sub", sub_func},
-	{"div", div_func}
+	{"div", div_func},
+	{"mul", mul_func}
 	};
 	int i;
 
